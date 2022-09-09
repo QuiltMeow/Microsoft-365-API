@@ -1,6 +1,17 @@
 <?php
 
 require("common.php");
+
+function changeAccount() {
+    global $accounts;
+    $change = is_numeric($_POST["account"]) ? $_POST["account"] : "0";
+    if ((int) $change < 0 || (int) $change >= count($accounts)) {
+        return false;
+    }
+    $_SESSION["account"] = $change;
+    return true;
+}
+
 if (empty($_GET["a"])) {
     if (check_login()) {
         header("location: ./admin.php?a=show");
@@ -16,8 +27,11 @@ if ($_GET["a"] == "login") {
     $username = !empty($_POST["username"]) ? $_POST["username"] : "";
     $password = !empty($_POST["password"]) ? $_POST["password"] : "";
     if ($username == $admin["username"] && hash("sha512", $password) == $admin["password"]) {
+        if (!changeAccount()) {
+            require("login.tpl");
+            exit();
+        }
         $_SESSION["token"] = hash("sha512", $admin["username"] . $admin["password"]);
-        $_SESSION["account"] = !empty($_POST["account"]) ? $_POST["account"] : "0";
         header("location: ./admin.php?a=show");
         exit();
     } else {
@@ -163,7 +177,7 @@ if ($_GET["a"] == "invitation_code_deluserasadminbyid") {
 }
 
 if ($_GET["a"] == "changeaccount") {
-    $_SESSION["account"] = $_POST["account"];
+    changeAccount();
     if (!check_login()) {
         response(1, "登入已失效");
     }
@@ -171,9 +185,7 @@ if ($_GET["a"] == "changeaccount") {
 }
 
 if ($_GET["a"] == "logout") {
-    $_SESSION["account"] = $_POST["account"];
-    $_SESSION["token"] = "";
-    session_stop;
+    session_destroy();
     if (!check_login()) {
         response(1, "登入已失效");
     }

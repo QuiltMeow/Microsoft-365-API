@@ -31,10 +31,9 @@
                             $i = 0;
                             foreach ($accounts as $value) {
                                 ?>
-                                <option value="<?php echo $i; ?>"><?php echo $value["name"]; ?></option>
+                                <option value="<?php echo $i++; ?>"><?php echo $value["name"]; ?></option>
                                 <?php
                             }
-                            $i++;
                             ?>
                         </select>
                     </div>

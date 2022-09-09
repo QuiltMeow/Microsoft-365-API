@@ -4,7 +4,7 @@ return [
     // 全局帳號相關設定
     "accounts" => [
         [
-            "name" => "你的訂閱名稱",
+            "name" => "你的全局名稱",
             "client_id" => "你的應用程式 (用戶端) 識別碼",
             "tenant_id" => "你的目錄 (租用戶) 識別碼",
             "client_secret" => "你的用戶端密碼",
@@ -13,7 +13,7 @@ return [
                 "A1P 教職員" => "78e66a63-337a-4a9a-8959-41c6654dfb56"
             ]
         ], [
-            "name" => "第二個訂閱",
+            "name" => "第二個全局",
             "client_id" => "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
             "tenant_id" => "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
             "client_secret" => "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
