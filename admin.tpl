@@ -42,15 +42,11 @@
         </table>
 
         <div id="add_account_content" class="layui-form layui-form-pane" style="display: none; margin: 1rem 3rem">
-            <form class="layui-form">
+            <form class="layui-form" id="add_account_form">
                 <div class="layui-form-item">
-                    <label class="layui-form-label">姓</label>
+                    <label class="layui-form-label">顯示名稱</label>
                     <div class="layui-input-inline">
-                        <input type="text" placeholder="英文 / 拼音" class="layui-input" id="lastname" pattern="[A-z0-9]{1,50}" required lay-verify="required" />
-                    </div>
-                    <label class="layui-form-label">名</label>
-                    <div class="layui-input-inline">
-                        <input type="text" placeholder="英文 / 拼音" class="layui-input" id="firstname" pattern="[A-z0-9]{1,50}" required lay-verify="required" />
+                        <input type="text" placeholder="帳號顯示的名稱" class="layui-input" id="displayname" required lay-verify="required" />
                     </div>
                 </div>
 
@@ -113,7 +109,7 @@
                 </div>
                 <div class="layui-form-item">
                     <div class="layui-input-block">
-                        <button class="layui-btn" lay-filter="formDemo" id="submitaccount">送出</button>
+                        <button class="layui-btn" lay-filter="formDemo" id="submitaccount" type="submit">送出</button>
                     </div>
                 </div>
             </form>
@@ -129,6 +125,7 @@
     </script>
     <script src="./layui/layui.js" charset="utf-8"></script>
     <script src="./layui/jquery.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dompurify/dist/purify.min.js"></script>
     <script type="text/javascript" charset="utf-8">
         layui.use(["table", "form", "layer"], function () {
             var table = layui.table;
@@ -216,7 +213,7 @@
                             if (res.code == 0) {
                                 obj.del();
                             }
-                            layer.msg(res.msg);
+                            layer.msg(DOMPurify.sanitize(res.msg));
                         }, "json");
                     });
                 }
@@ -235,7 +232,7 @@
                                     });
                                 });
                             }
-                            layer.msg(res.msg);
+                            layer.msg(DOMPurify.sanitize(res.msg));
                         }, "json");
                     });
                 }
@@ -254,7 +251,7 @@
                                     });
                                 });
                             }
-                            layer.msg(res.msg);
+                            layer.msg(DOMPurify.sanitize(res.msg));
                         }, "json");
                     });
                 }
@@ -273,7 +270,7 @@
                                     });
                                 });
                             }
-                            layer.msg(res.msg);
+                            layer.msg(DOMPurify.sanitize(res.msg));
                         }, "json");
                     });
                 }
@@ -292,7 +289,7 @@
                                     });
                                 });
                             }
-                            layer.msg(res.msg);
+                            layer.msg(DOMPurify.sanitize(res.msg));
                         }, "json");
                     });
                 }
@@ -307,7 +304,7 @@
                         if (res.code == 1) {
                             layer.closeAll();
                         }
-                        layer.msg(res.msg);
+                        layer.msg(DOMPurify.sanitize(res.msg));
                         window.location.reload();
                     }, "json");
                 });
@@ -319,7 +316,7 @@
                         if (res.code == 1) {
                             layer.closeAll();
                         }
-                        layer.msg(res.msg);
+                        layer.msg(DOMPurify.sanitize(res.msg));
                         window.location.reload();
                     }, "json");
                 });
@@ -337,10 +334,10 @@
                 });
             });
 
-            $("#submitaccount").click(function () {
+            $("#add_account_form").submit(function (event) {
+                event.preventDefault();
                 var data = {
-                    firstname: $("#firstname").val(),
-                    lastname: $("#lastname").val(),
+                    displayname: $("#displayname").val(),
                     add_user: $("#add_user").val(),
                     domain: $("#domain").val(),
                     password: $("#password").val(),
@@ -359,7 +356,7 @@
                             });
                         });
                     }
-                    layer.msg(res.msg);
+                    layer.msg(DOMPurify.sanitize(res.msg));
                 }, "json");
             });
         });

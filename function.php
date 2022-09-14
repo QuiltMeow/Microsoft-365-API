@@ -32,7 +32,7 @@ function create_user($request, $token, $domain, $sku_id, $password) {
     $user_email = $request["username"] . "@" . $domain;
     $data = [
         "accountEnabled" => true,
-        "displayName" => $request["firstname"] . " " . $request["lastname"],
+        "displayName" => $request["displayname"],
         "mailNickname" => $request["username"],
         "passwordPolicies" => "DisablePasswordExpiration, DisableStrongPassword",
         "passwordProfile" => [
@@ -57,7 +57,7 @@ function admin_create_user($request, $token, $domain, $sku_id, $password, $force
     $user_email = $request["username"] . "@" . $domain;
     $data = [
         "accountEnabled" => true,
-        "displayName" => $request["firstname"] . " " . $request["lastname"],
+        "displayName" => $request["displayname"],
         "mailNickname" => $request["username"],
         "passwordPolicies" => "DisablePasswordExpiration, DisableStrongPassword",
         "passwordProfile" => [

@@ -24,6 +24,19 @@ if (empty($_GET["a"])) {
 
 $ii = 0;
 if ($_GET["a"] == "login") {
+    if (empty($_POST["g-recaptcha-response"])) {
+        require("login.tpl");
+        exit();
+    }
+
+    include_once("re_captcha_lib.php");
+    $re_captcha = new ReCaptcha($reCAPTCHA_secret_key);
+    $re_captcha_res = $re_captcha->verifyResponse($_SERVER["REMOTE_ADDR"], $_POST["g-recaptcha-response"]);
+    if (!isset($re_captcha_res) || !$re_captcha_res->success) {
+        require("login.tpl");
+        exit();
+    }
+
     $username = !empty($_POST["username"]) ? $_POST["username"] : "";
     $password = !empty($_POST["password"]) ? $_POST["password"] : "";
     if ($username == $admin["username"] && hash("sha512", $password) == $admin["password"]) {
@@ -90,8 +103,7 @@ if ($_GET["a"] == "admin_add_account") {
 
     $request = [
         "username" => $_POST["add_user"],
-        "firstname" => $_POST["firstname"],
-        "lastname" => $_POST["lastname"]
+        "displayname" => $_POST["displayname"]
     ];
 
     $token = get_ms_token($accounts[$ii]["tenant_id"], $accounts[$ii]["client_id"], $accounts[$ii]["client_secret"]);
@@ -186,7 +198,5 @@ if ($_GET["a"] == "changeaccount") {
 
 if ($_GET["a"] == "logout") {
     session_destroy();
-    if (!check_login()) {
-        response(1, "登入已失效");
-    }
+    response(1, "登出完成");
 }

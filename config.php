@@ -8,7 +8,7 @@ return [
             "client_id" => "你的應用程式 (用戶端) 識別碼",
             "tenant_id" => "你的目錄 (租用戶) 識別碼",
             "client_secret" => "你的用戶端密碼",
-            "sku_ids" => [ // 全局所包含的授權設定
+            "sku_ids" => [// 全局所包含的授權設定
                 "A1P 學生" => "e82ae690-a2d5-4d76-8d30-7c6e01e6022e",
                 "A1P 教職員" => "78e66a63-337a-4a9a-8959-41c6654dfb56"
             ]
@@ -37,5 +37,8 @@ return [
     "admin" => [
         "username" => "xxxxxxxx", // 登入帳號
         "password" => "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" // 自行輸入密碼 https://miniwebtool.com/zh-tw/sha512-hash-generator 填入輸出
-    ]
+    ],
+    // "我不是機器人" 設定
+    "reCAPTCHA_site_key" => "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "reCAPTCHA_secret_key" => "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 ];

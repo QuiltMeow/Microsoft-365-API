@@ -6,6 +6,7 @@
         <title>Microsoft Office 365 全局管理</title>
         <link rel="stylesheet" href="./layui/css/layui.css" media="all" />
         <link href="./files/mslogo.png" rel="icon" type="image/png" />
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     </head>
     <body>
         <div class="layui-container"> 
@@ -36,6 +37,12 @@
                             }
                             ?>
                         </select>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <div class="g-recaptcha" data-sitekey="<?php echo $reCAPTCHA_site_key; ?>"></div>
                     </div>
                 </div>
 
